@@ -1,3 +1,4 @@
+"use strict";
 /* -------------------------------------- */
 //Function Basics 
 //declared greet as a type function
