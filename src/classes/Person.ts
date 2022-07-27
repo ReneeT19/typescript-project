@@ -1,9 +1,13 @@
+//use interface with class; make sure `implements HasFormatter`
+import { HasFormatter } from "../interfaces/HasFormatter.js";
+
+
 //use Module (change tsconfig.json to "module": "ES2015")
-export class Person {
+export class Person implements HasFormatter {
     constructor (
         readonly name: string,
-        private age: number,
         public job: string,
+        public age: number
     ){}
 
     info() {

@@ -15,7 +15,7 @@ class Invoice {
     }
 
     //methods
-    format() {
+    info() {
         return `${this.client} owes $${this.amount} for ${this.details}`;
     }
 }
@@ -43,7 +43,7 @@ invOne.client = 'yoshi'; //because the properties declared are by default public
 //if everything is public, you can access every property here in the forEach loop
 //if details is private, you can't access it here in the forEach loop
 invoices.forEach(invoice => {
-    console.log(invoice.client, invoice.details, invoice.amount, invoice.format());
+    console.log(invoice.client, invoice.details, invoice.amount, invoice.info());
 });
 
 //alternative way is to remove the properties but define the modifier in the constructor
@@ -59,8 +59,8 @@ class Invoice2 {
 //use webpack to bundle code into one single file and support all browsers
 import { Person } from './classes/Person.js';
 
-const personOne = new Person ('jay', 25, 'accountant');
-const personTwo = new Person ('lucy', 40, 'lawyer');
+const personOne = new Person ('jay', 'accountant', 25);
+const personTwo = new Person ('lucy', 'lawyer', 40);
 
 let people: Person[] = [];
 people.push(personOne);
@@ -105,3 +105,16 @@ greetPerson(me);
 
 /* -------------------------------------- */
 // Interfaces and Classes
+import { Payment } from './classes/Payment.js';
+import { HasFormatter } from './interfaces/HasFormatter.js';
+import { ListTemplate } from './classes/ListTemplate.js';
+
+let docOne: HasFormatter;
+
+docOne = new Payment('me','work ',10); //docOne can be a Payment object becuase Payment implements HasFormatter interface
+//this way the code is structured better and more secure
+
+let docs: HasFormatter[] = [];
+docs.push(docOne); //check the structure of the code 
+console.log(docs, docOne.info());
+

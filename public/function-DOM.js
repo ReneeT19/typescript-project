@@ -1,6 +1,8 @@
-"use strict";
 /* -------------------------------------- */
 //Function Basics 
+import { ListTemplate } from "./classes/ListTemplate.js";
+import { Payment } from "./classes/Payment.js";
+import { Person } from "./classes/Person.js";
 //declared greet as a type function
 let greet = () => {
     console.log('hello');
@@ -78,6 +80,23 @@ const input3 = document.querySelector('#amount');
 //grab the value and console log them using EventListener
 form2.addEventListener('submit', (e) => {
     e.preventDefault(); //prevent the page from refreshing
+    //tuple
+    let values;
+    values = [input1.value, input2.value, input3.valueAsNumber];
     console.log(input.value, input1.value, input2.value, input3.valueAsNumber //the input is number but the returned value is string, so change it to valueAsNumber
     );
+    //use Interface to create objects that grab the input values when the use submits the form
+    let doc;
+    if (input.value === 'payment') {
+        doc = new Payment(input1.value, input2.value, input3.valueAsNumber);
+    }
+    else {
+        doc = new Person(...values); //use tuple defined above here to avoid repeating code
+    }
+    console.log(doc, doc.info());
+    /* -------------------------------------- */
+    // Rendering a HTML template; the style comes from style.css
+    const ul = document.querySelector('ul');
+    const list = new ListTemplate(ul);
+    list.render(doc, input.value, 'end');
 });
